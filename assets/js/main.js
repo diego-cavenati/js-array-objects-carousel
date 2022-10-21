@@ -98,6 +98,9 @@ nextElement.addEventListener('click', function() {
 
     //incremento il valore della slide attiva
     slidesActive++;
+    if (slidesActive == imgSlides.length) {
+        slidesActive = 0;
+    }
 
     
     // selezione la slide che deve essere attiva
@@ -136,6 +139,10 @@ prevElement.addEventListener('click', function() {
 
     //incremento il valore della slide attiva
     slidesActive--;
+
+    if (slidesActive < 0) {
+        slidesActive = 4;
+    }
 
     
     // selezione la slide che deve essere attiva

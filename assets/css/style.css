@@ -26,6 +26,13 @@ img {
     display: block;
 }
 
+.info > h2, .info > p {
+    display: none;
+}
+
+.info > h2.active, .info > p.active {
+    display: block;
+}
 .controls {
     display: flex;
     justify-content: center;
