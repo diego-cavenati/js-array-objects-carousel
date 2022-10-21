@@ -50,6 +50,14 @@ const slidesElement = document.querySelector(".slides");
 const prevElement = document.querySelector(".prev");
 const nextElement = document.querySelector(".next");
 
+// Seleziono le Thumb
+const thumb1Element = document.querySelector(".thumb1");
+const thumb2Element = document.querySelector(".thumb2");
+const thumb3Element = document.querySelector(".thumb3");
+const thumb4Element = document.querySelector(".thumb4");
+const thumb5Element = document.querySelector(".thumb5");
+
+
 //seleziono elemento per il titolo
 const slidesDescription = document.querySelector('.info');
 
@@ -71,48 +79,26 @@ const markupSlides = imgSlides.forEach(element => {
     slidesDescription.insertAdjacentHTML("beforeend", markupDescription);
 
     i++
-    return 
+
 });
+
+const allSlides = document.querySelectorAll('.slides > img');
+const allDescription = document.querySelectorAll('.info > p');
+const allTitle = document.querySelectorAll('.info > h2');
 
 
 //  pulsante next
 nextElement.addEventListener('click', function() {
 
-    //Seleziono tutte le immagini 
-    const allSlides = document.querySelectorAll('.slides > img');
-    // Seleziono descrizione
-    const allDescription = document.querySelectorAll('.info > p');
-    // Seleziono titolo
-    const allTitle = document.querySelectorAll('.info > h2');
+    removeActive();
 
-
-    const visibleSlideInfo = allDescription[slidesActive];
-    visibleSlideInfo.classList.remove('active');
-
-    const visibleSlideTitle = allTitle[slidesActive];
-    visibleSlideTitle.classList.remove('active');
-    
-    const visibleSlide = allSlides[slidesActive];
-    visibleSlide.classList.remove('active');
-
-
-    //incremento il valore della slide attiva
     slidesActive++;
+
     if (slidesActive == imgSlides.length) {
         slidesActive = 0;
     }
 
-    
-    // selezione la slide che deve essere attiva
-    const nextSlideActive = allSlides[slidesActive];
-    // aggiungo la classe active e la rendo visibile
-    nextSlideActive.classList.add('active');
-
-    const nextSlideInfoActive = allDescription[slidesActive];
-    nextSlideInfoActive.classList.add('active');
-
-    const nextSlideTitleActive = allTitle[slidesActive];
-    nextSlideTitleActive.classList.add('active');
+    addActive();
 
 }
 )
@@ -120,41 +106,88 @@ nextElement.addEventListener('click', function() {
 //  pulsante prev
 prevElement.addEventListener('click', function() {
 
-    const allSlides = document.querySelectorAll('.slides > img');
-    // Seleziono descrizione
-    const allDescription = document.querySelectorAll('.info > p');
-    // Seleziono titolo
-    const allTitle = document.querySelectorAll('.info > h2');
+    removeActive();
 
-    
-    const visibleSlideInfo = allDescription[slidesActive];
-    visibleSlideInfo.classList.remove('active');
-
-    const visibleSlideTitle = allTitle[slidesActive];
-    visibleSlideTitle.classList.remove('active');
-    
-    const visibleSlide = allSlides[slidesActive];
-    visibleSlide.classList.remove('active');
-
-
-    //incremento il valore della slide attiva
     slidesActive--;
 
     if (slidesActive < 0) {
         slidesActive = 4;
     }
-
     
-    // selezione la slide che deve essere attiva
-    const nextSlideActive = allSlides[slidesActive];
-    // aggiungo la classe active e la rendo visibile
-    nextSlideActive.classList.add('active');
-
-    const nextSlideInfoActive = allDescription[slidesActive];
-    nextSlideInfoActive.classList.add('active');
-
-    const nextSlideTitleActive = allTitle[slidesActive];
-    nextSlideTitleActive.classList.add('active');
+    addActive();
 
 }
 )
+
+thumb1Element.addEventListener('click', function(){
+    removeActive();
+    slidesActive = 0;
+    addActive();
+})
+
+thumb2Element.addEventListener('click', function(){
+    removeActive();
+    slidesActive = 1;
+    addActive();
+})
+
+thumb3Element.addEventListener('click', function(){
+    removeActive();
+    slidesActive = 2;
+    addActive();
+})
+
+thumb4Element.addEventListener('click', function(){
+    removeActive();
+    slidesActive = 3;
+    addActive();
+})
+
+thumb5Element.addEventListener('click', function(){
+    removeActive();
+    slidesActive = 4;
+    addActive();
+})
+
+
+function removeActive() {
+    removeActiveTitle()
+    removeActiveDescription()
+    removeActiveSlides()
+}
+
+function removeActiveTitle() {
+    const visibleSlideTitle = allTitle[slidesActive];
+    return visibleSlideTitle.classList.remove('active');
+}
+
+function removeActiveDescription() {
+    const visibleSlideInfo = allDescription[slidesActive];
+    return visibleSlideInfo.classList.remove('active');
+}
+
+function removeActiveSlides() {
+    const visibleSlide = allSlides[slidesActive];
+    return visibleSlide.classList.remove('active');
+}
+
+function addActive() {
+    addActiveTitle()
+    addActiveDescription()
+    addActiveSlides()
+}
+
+function addActiveTitle() {
+    const nextSlideTitleActive = allTitle[slidesActive];
+    nextSlideTitleActive.classList.add('active');
+}
+
+function addActiveDescription() {
+    const nextSlideInfoActive = allDescription[slidesActive];
+    nextSlideInfoActive.classList.add('active');
+}
+
+function addActiveSlides() {
+    const nextSlideActive = allSlides[slidesActive];
+    nextSlideActive.classList.add('active');
+}

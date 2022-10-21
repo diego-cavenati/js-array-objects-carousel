@@ -13,6 +13,7 @@ img {
 
 .slides {
     align-self: center;
+    width: 100%;
 }
 
 .slides > img {
@@ -37,4 +38,13 @@ img {
     display: flex;
     justify-content: center;
     padding: 1rem;
+}
+
+.miniatura {
+    display: flex;
+}
+
+.miniatura > img {
+    height: 200px;
+    object-fit: cover;
 }
