@@ -149,6 +149,19 @@ thumb5Element.addEventListener('click', function(){
     addActive();
 })
 
+const changeSlide = setInterval(function() {
+
+    removeActive();
+
+    slidesActive++;
+
+    if (slidesActive == imgSlides.length) {
+        slidesActive = 0;
+    }
+
+    addActive();
+
+}, 3000)
 
 function removeActive() {
     removeActiveTitle()
