@@ -1,0 +1,50 @@
+/* Common rules */
+img {
+    max-width: 100%;
+}
+
+/* main */
+.slider { 
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.slides {
+    align-self: center;
+    width: 100%;
+}
+
+.slides > img {
+    display: none;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.slides > img.active {
+    display: block;
+}
+
+.info > h2, .info > p {
+    display: none;
+}
+
+.info > h2.active, .info > p.active {
+    display: block;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.miniatura {
+    display: flex;
+}
+
+.miniatura > img {
+    height: 200px;
+    object-fit: cover;
+}
