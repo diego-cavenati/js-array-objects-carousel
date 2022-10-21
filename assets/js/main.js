@@ -16,7 +16,6 @@ Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi)
 BONUS 3  (opzionale):
 Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
-
 */
 
 const imgSlides = [
@@ -149,6 +148,8 @@ thumb5Element.addEventListener('click', function(){
     addActive();
 })
 
+let direction;
+
 const changeSlide = setInterval(function() {
 
     removeActive();
@@ -161,7 +162,84 @@ const changeSlide = setInterval(function() {
 
     addActive();
 
+    direction = "right";
+
 }, 3000)
+
+const playEl = document.querySelector(".play");
+const pauseEl = document.querySelector(".pause");
+
+const changeEl = document.querySelector(".change-direction");
+
+let timeId
+
+playEl.addEventListener('click', function () {
+
+    let timeId = setInterval(function() {
+
+        removeActive();
+    
+        slidesActive++;
+    
+        if (slidesActive == imgSlides.length) {
+            slidesActive = 0;
+        }
+    
+        addActive();
+
+        direction = "right";
+
+    
+    }, 3000)
+
+})
+
+pauseEl.addEventListener('click', function () {
+    clearInterval(timeId);
+    clearInterval(changeSlide);
+})
+
+changeEl.addEventListener('click', function () {
+
+    if (direction == "left") {
+        let timeId = setInterval(function() {
+
+            removeActive();
+        
+            slidesActive++;
+        
+            if (slidesActive == imgSlides.length) {
+                slidesActive = 0;
+            }
+        
+            addActive();
+        
+        }, 3000)
+
+    } 
+    
+    if (direction == "right") {
+
+        let timeId = setInterval(function() {
+
+            removeActive();
+        
+            slidesActive--;
+    
+            if (slidesActive < 0) {
+                slidesActive = 4;
+            }
+        
+            addActive();
+
+            direction = "left"
+        
+        }, 3000)
+    }
+
+})
+
+
 
 function removeActive() {
     removeActiveTitle()
