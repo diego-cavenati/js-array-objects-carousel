@@ -1,13 +1,4 @@
 /* 
-Dato un array di oggetti letterali con:
-url dell’immagine
-titolo
-descrizione Creare un carosello come nella foto allegata.
-
-
-Milestone 0:
-Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
-
 Milestone 1:
 Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
 Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
@@ -28,7 +19,7 @@ Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 */
 
-const images = [
+const imgSlides = [
     {
         image: 'img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
@@ -51,3 +42,112 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+// selezione dove mettere le immagini
+const slidesElement = document.querySelector(".slides");
+
+// seleziono i pulsanti in pagina
+const prevElement = document.querySelector(".prev");
+const nextElement = document.querySelector(".next");
+
+//seleziono elemento per il titolo
+const slidesDescription = document.querySelector('.info');
+
+// creo la variabile che stabilisce che il conteggio parte da 0
+let slidesActive = 0;
+
+
+// Inserisco in .slides le immagini grazie ad un loop
+let i = 0;
+const markupSlides = imgSlides.forEach(element => {
+    
+    const markupSlide = `<img class="${i === slidesActive ? `active` : ``}" src="./assets/${element.image}" alt="">`;
+    slidesElement.insertAdjacentHTML('beforeend', markupSlide);
+    
+    const markupTitle = `<h2 class="${i === slidesActive ? `active` : ``}">${element.title}</h2>`;
+    slidesDescription.insertAdjacentHTML("afterbegin", markupTitle);
+
+    const markupDescription = `<p class="${i === slidesActive ? `active` : ``}">${element.text}</p>`;
+    slidesDescription.insertAdjacentHTML("beforeend", markupDescription);
+
+    i++
+    return 
+});
+
+
+//  pulsante next
+nextElement.addEventListener('click', function() {
+
+    //Seleziono tutte le immagini 
+    const allSlides = document.querySelectorAll('.slides > img');
+    // Seleziono descrizione
+    const allDescription = document.querySelectorAll('.info > p');
+    // Seleziono titolo
+    const allTitle = document.querySelectorAll('.info > h2');
+
+
+    const visibleSlideInfo = allDescription[slidesActive];
+    visibleSlideInfo.classList.remove('active');
+
+    const visibleSlideTitle = allTitle[slidesActive];
+    visibleSlideTitle.classList.remove('active');
+    
+    const visibleSlide = allSlides[slidesActive];
+    visibleSlide.classList.remove('active');
+
+
+    //incremento il valore della slide attiva
+    slidesActive++;
+
+    
+    // selezione la slide che deve essere attiva
+    const nextSlideActive = allSlides[slidesActive];
+    // aggiungo la classe active e la rendo visibile
+    nextSlideActive.classList.add('active');
+
+    const nextSlideInfoActive = allDescription[slidesActive];
+    nextSlideInfoActive.classList.add('active');
+
+    const nextSlideTitleActive = allTitle[slidesActive];
+    nextSlideTitleActive.classList.add('active');
+
+}
+)
+
+//  pulsante prev
+prevElement.addEventListener('click', function() {
+
+    const allSlides = document.querySelectorAll('.slides > img');
+    // Seleziono descrizione
+    const allDescription = document.querySelectorAll('.info > p');
+    // Seleziono titolo
+    const allTitle = document.querySelectorAll('.info > h2');
+
+    
+    const visibleSlideInfo = allDescription[slidesActive];
+    visibleSlideInfo.classList.remove('active');
+
+    const visibleSlideTitle = allTitle[slidesActive];
+    visibleSlideTitle.classList.remove('active');
+    
+    const visibleSlide = allSlides[slidesActive];
+    visibleSlide.classList.remove('active');
+
+
+    //incremento il valore della slide attiva
+    slidesActive--;
+
+    
+    // selezione la slide che deve essere attiva
+    const nextSlideActive = allSlides[slidesActive];
+    // aggiungo la classe active e la rendo visibile
+    nextSlideActive.classList.add('active');
+
+    const nextSlideInfoActive = allDescription[slidesActive];
+    nextSlideInfoActive.classList.add('active');
+
+    const nextSlideTitleActive = allTitle[slidesActive];
+    nextSlideTitleActive.classList.add('active');
+
+}
+)
